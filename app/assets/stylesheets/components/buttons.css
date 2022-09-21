@@ -1,9 +1,9 @@
 .btn {
-    @apply font-semibold text-lg py-3 px-6 rounded cursor-pointer no-underline;
+    @apply font-medium py-3 px-6 rounded cursor-pointer no-underline;
 }
 
 .btn-small {
-    @apply font-bold py-2 px-4 rounded text-sm;
+    @apply font-medium py-2 px-4 rounded text-sm;
 }
 
 .btn-indigo {
@@ -15,7 +15,7 @@
 }
 
 .btn-outline {
-    @apply text-gray-800 border-gray-400 hover:bg-gray-100;
+    @apply text-gray-800 border border-gray-400 hover:bg-gray-100;
 }
 
 .btn-white {

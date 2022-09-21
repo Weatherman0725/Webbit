@@ -14,7 +14,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body class="bg-red-200 relative h-screen overflow-x-hidden">
+  <body class="bg-red-300 relative h-screen overflow-x-hidden accent-indigo-600">
 
     <% flash.each do |type, message| %>
       <% if type = "alert" %>
@@ -34,50 +34,60 @@
       <% end %>  
     <% end %>
 
-     <nav class="bg-white py-2 border-b border-gray-400" role="navigation" aria-label="main navigation">
-      <div class="flex flex-wrap items-center justify-center lg:justify-start lg:content-center px-4 lg:px-6 space-x-3">
+    <nav class="bg-white py-2 border-b border-gray-400" role="navigation" aria-label="main navigation">
+      <div class="flex flex-wrap items-center justify-center lg:justify-start lg:content-center px-4 lg:px-6 lg:space-x-3 lg:py-0 py-3">
       
-        <%= link_to root_path, class: "leading-normal no-underlind text-gray-800 my-2 md:my-0 hover:text-indigo-600" do %>
+        <%= link_to root_path, class: "leading-normal no-underlind text-gray-800 my-2 md:my-0 hover:text-indigo-600 lg:w-auto w-full lg:text-left text-center" do %>
           <h1 class="text-lg pr-2 uppercase font-semibold">Webbet</h1>
          <% end %> 
       
         <div class="flex flex-wrap justify-start w-full lg:w-2/3 flex-1">
 
-          <div class="flex items-center flex-1 space-x-3">
-            <div >
-            <div class="relative">
-              <select>
-                <option>Community 1</option>
-                <option>Community 2</option>
-                <option>Community 3</option>
-              </select>
-            </div>
-            </div>
+          <div class="flex flex-wrap items-center lg:flex-1 lg:space-x-6 lg:w-auto w-full">
+            <div class="lg:w-1/4 w-full lg:mb-0 mb-3">
+              <div class="relative">
+                <select class ="select">
+                  <option>Community 1</option>
+                  <option>Community 2</option>
+                  <option>Community 3</option>
+                </select>
 
-            <div>
-            <div class="relative">
-              <input type="text" class="input pl-10" placeholder="Search webbit">
-              <div class="pointer-events-none absolute left-0 top-0 flex items-center">
-                <%= render_svg "icons/search", styles: "stroke-current w-5 h-5 text-gray-600" %>
+                <div class="pointer-events-none absolute inset-y-5 right-2 flex items-center">
+                  <%= render_svg "icons/chevron-down", styles: "fill-current w-5 h-5 text-gray-500" %>
+                </div>
               </div>
             </div>
-            </div>
-          </div>  
 
-          <div class="flex flex-wrap items-center justify-end pt-4 lg:pt-0">
+          <div class="lg:flex-1 lg:w-auto w-full lg:mb-0 mb-3">
+            <div class="relative">
+              <input type="text" class="input pl-9" placeholder="Search webbit">
+              <div class="pointer-events-none absolute inset-y-5 left-2 flex items-center">
+                <%= render_svg "icons/search", styles: "stroke-current w-6 h-6 text-gray-600" %>
+              </div>
+            </div>
+          </div>
+        </div>  
+
+          <div class=" lg:pl-6 flex flex-wrap items-center justify-end pt-4 lg:pt-0">
             <div class="mr-3">
-              <% if user_signed_in? %>
+                <% if user_signed_in? %>
                   <%= link_to new_submission_path do %>
                     <%= render_svg "icons/create" %>
-                <% end %>
+                  <% end %>
 
+                <% else %>
+                  <%= link_to "Login", new_user_session_path, class: "btn btn-outline btn-small mr-4" %>
+                  <%= link_to "Sign up", new_user_registration_path, class: "btn btn-indigo btn-small" %>
+              <% end %>
+            </div>
+              <% if user_signed_in? %>
                 <div class="rounded bg-white border border-gray-400 text-gray-600 ml-1 hover:bg-gray-200">
                   <div class="pt-2 mb-2 pl-3 pr-1">
                     <%= link_to "#", class: "no-underline flex justify=between text-xs tracking-wide items-center font-semibold" do %>
-                      <%= current_user.username ||= current_user.email %>
+                      <%= current_user.email ||= current_user.username %>
                       <%= render_svg "icons/chevron-down" %>
                     <% end %>
-                    <ul>
+                    <ul class="">
                       <li>
                         <%= link_to "#", class:"hover:bg-indigo-600 hover:text-white text-gray-700 no-underline block py-2 px-4 flex items-center text-sm" do %>
                           <%= render_svg "icons/user" , styles: "w-5 h-5 fill-current text-gray-600 mr-3" %>
@@ -97,13 +107,8 @@
                         <% end %>  
                       </li>
                     </ul>
-                  </div>
-                
+                  </div> 
                 </div>
-
-              <% else %>
-                <%= link_to "Login", new_user_session_path, class: "btn btn-outline btn-sm mr-2" %>
-                <%= link_to "Sign up", new_user_registration_path, class: "btn btn-indigo btn-small" %>
               <% end %>
             </div>
           </div>
@@ -111,7 +116,8 @@
 
       </div>
     </nav>
-    <div></div>
+    <div class="container mx-auto py-6 px-4">
     <%= yield %>
+    </div>
   </body>
 </html>
